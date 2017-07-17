@@ -1,4 +1,4 @@
-package qframe_handler_log
+package qhandler_log
 
 import (
 	"fmt"
