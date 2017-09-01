@@ -40,7 +40,9 @@ func (p *Plugin) Run() {
 			switch val.(type) {
 			case qtypes_messages.Message:
 				qm := val.(qtypes_messages.Message)
-				qm.StopProcessing(p.Plugin, false)
+				if qm.StopProcessing(p.Plugin, false) {
+					continue
+				}
 				p.Log("info" , fmt.Sprintln(qm.ToJSON()))
 			default:
 				p.Log("info", fmt.Sprintf("Dunno type '%s': %v", reflect.TypeOf(val), val))
