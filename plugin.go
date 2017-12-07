@@ -40,12 +40,13 @@ func (p *Plugin) Run() {
 		select {
 		case val := <-bg.Read:
 			switch val.(type) {
+			// TODO: That has to be an interface!
 			case qtypes_messages.Message:
 				qm := val.(qtypes_messages.Message)
 				if qm.StopProcessing(p.Plugin, false) {
 					continue
 				}
-				p.Log("info" , fmt.Sprintf("%-15s : %s", strings.Join(qm.SourcePath, "->"), qm.Message))
+				p.Log("info" , fmt.Sprintf("%-15s : %s", strings.Join(qm.SourcePath, "->"), qm.Msg))
 			case qcache_inventory.ContainerRequest:
 				continue
 			default:
